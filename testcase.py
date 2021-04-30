@@ -5,7 +5,7 @@ import pytest
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-
+import time
 path = "C:\\webdriver\\chromedriver.exe"
 
 class TestBikroy:
@@ -128,3 +128,37 @@ class TestBikroy:
             val = ''.join(val)
             new_func = self.driver.find_element_by_xpath(f'//*[@id="app-wrapper"]//span[text()="Tk {val}"]').click()
         self.driver.close()
+
+
+    def test_link(self):
+        self.driver = webdriver.Chrome(executable_path=path)
+        self.driver.get("http://bikroy.com/en/ads/")
+        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+        status = self.driver.find_element_by_xpath('//*[@id="app-wrapper"]/div[1]/div[6]/div/div/div/div[3]/div[1]').is_displayed()
+        if status == True:
+            print("Winning First")
+            allure.attach(self.driver.get_screenshot_as_png(), name="copyright", attachment_type=AttachmentType.PNG)
+            assert True, "Copyright © Saltside Technologies"
+        else:
+            assert False
+
+        for i in range(0,6):
+            self.driver.get("http://bikroy.com/en/ads/")
+            self.driver.find_element_by_xpath(f'//*[@id="app-wrapper"]/div[1]/div[6]/div/div/div/div[1]/div[2]/ul/li[{i+1}]/a').click()
+            time.sleep(5)
+        for i in range(0,3):
+            self.driver.get("http://bikroy.com/en/ads/")
+            self.driver.find_element_by_xpath(f'//*[@id="app-wrapper"]/div[1]/div[6]/div/div/div/div[1]/div[3]/ul/li[{i+1}]/a').click()
+            time.sleep(5)
+        for i in range(0,4):
+            self.driver.get("http://bikroy.com/en/ads/")
+            self.driver.find_element_by_xpath(f'//*[@id="app-wrapper"]/div[1]/div[6]/div/div/div/div[1]/div[4]/ul/li[{i+1}]/a').click()
+            time.sleep(5)
+        for i in range(0,5):
+            self.driver.get("http://bikroy.com/en/ads/")
+            self.driver.find_element_by_xpath(f'//*[@id="app-wrapper"]/div[1]/div[6]/div/div/div/div[1]/div[5]/ul/li[{i+1}]/a').click()
+            time.sleep(5)
+        # for i in open_url:
+            # print(i.text)
+        self.driver.close()
+
