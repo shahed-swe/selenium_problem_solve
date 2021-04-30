@@ -80,7 +80,7 @@ class TestBikroy:
         self.driver.close()
 
 
-    @pytest.mark.parametrize("data", ["dhaka", "chattogram", "sylhet", "khulna", "barishal", "rajshahi", "rangpur", "mymensingh"])
+    @pytest.mark.parametrize("data", ["dhaka","sylhet", "rajshahi", "rangpur", "mymensingh"])
     def test_case(self,data):
         self.driver = webdriver.Chrome(executable_path=path)
         self.driver.get(f"https://bikroy.com/en/ads/{data}/")
